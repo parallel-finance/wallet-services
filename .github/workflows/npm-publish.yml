@@ -39,6 +39,6 @@ jobs:
           git stash && echo "ok"
           npm version patch
           git push --follow-tags origin main
-      - run: npm publish
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
