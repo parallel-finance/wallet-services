@@ -34,11 +34,11 @@ jobs:
         run: |
           git config --global user.name 'Github Action'
           git config --global user.email 'bot@users.noreply.github.com'
-          
+
       - run: |
           git stash && echo "ok"
           npm version patch
-          git push --follow-tags origin master
+          git push --follow-tags origin main
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
