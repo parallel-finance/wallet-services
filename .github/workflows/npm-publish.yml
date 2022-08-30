@@ -30,7 +30,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: |
-          git stash
+          git stash && echo "ok"
           npm version patch
           git push --follow-tags origin master
       - run: npm publish
