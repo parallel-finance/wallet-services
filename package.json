@@ -2,8 +2,14 @@
   "name": "@parallel-fi/wallet-services",
   "version": "1.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
+    "build": "npx tsc -p tsconfig.json && npx tsc -p tsconfig-cjs.json",
+    "prepublish": "npm run build",
     "test": "echo 'no tests'"
   },
   "repository": {
@@ -16,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/parallel-finance/wallet-services/issues"
   },
-  "homepage": "https://github.com/parallel-finance/wallet-services#readme"
+  "homepage": "https://github.com/parallel-finance/wallet-services#readme",
+  "devDependencies": {
+    "typescript": "^4.8.2"
+  }
 }
