@@ -29,6 +29,12 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      
+      - name: ⚙️ Prepare package & version
+        run: |
+          git config --global user.name 'Github Action'
+          git config --global user.email 'bot@users.noreply.github.com'
+          
       - run: |
           git stash && echo "ok"
           npm version patch
