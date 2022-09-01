@@ -53,8 +53,8 @@ export const depositToParallel = async (
   decimals: number,
   address: string
 ): Promise<{
-  api: ApiPromise,
-  tx: SubmittableExtrinsic<'promise'>
+  api: ApiPromise;
+  tx: SubmittableExtrinsic<'promise'>;
 }> => {
   const chain = Chain[sourceNetwork];
   const { api }: { api: ApiPromise } = await statefulRpc.getRpcConnection(chain);

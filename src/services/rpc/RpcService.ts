@@ -1,5 +1,5 @@
 import { Transfer } from './models';
-import { Balances, Asset } from '../assets/models';
+import { Asset, Balances } from '../assets/models';
 
 export interface RpcService {
   fetchAccountBalance(address: string, assetSymbol?: string): Promise<Balances | null>;

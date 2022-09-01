@@ -1,8 +1,8 @@
 import * as bip39 from 'bip39';
-import { Wallet, WalletWithAssets, WalletSource } from '../models';
+import { Wallet, WalletSource, WalletWithAssets } from '../models';
 import { getRandomUniqueWalletId } from '../cryptography/RandomGen';
 import { Encryptor } from '../cryptography/Encryptor';
-import { Asset, LedgerNetworksDerivableMap, Networks, Chain } from '../assets/models';
+import { Asset, Chain, LedgerNetworksDerivableMap, Networks } from '../assets/models';
 import { AssetGenerator } from '../assets/AssetGenerator';
 import { WalletCreationResult } from './models';
 import { ASSETS_CONFIGS } from '../assets/assets.configs';

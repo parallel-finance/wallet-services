@@ -5,7 +5,6 @@ import { isAddress } from 'web3-utils';
 import { ASSET_ACCOUNT_TYPES } from '../services/assets/assets.configs';
 import { Chain, Networks } from '../services/assets/models';
 
-
 export const sleep = ms =>
   new Promise(resolve => {
     return setTimeout(resolve, ms);
@@ -38,7 +37,6 @@ export const massageBalancesFromRPC = (num: string, assetDecimals: number): stri
   return new BigNumber(parsedBalance).div(new BigNumber(10).pow(assetDecimals)).toFixed(4);
 };
 
-
 export const isValidAddress = (address: string, accountType: string) => {
   switch (accountType) {
     case ASSET_ACCOUNT_TYPES.SECP256K1: {
@@ -57,4 +55,3 @@ export const isValidAddress = (address: string, accountType: string) => {
 
 export const getNetworkFromChainNumber = (chainNumber: number): Networks | null =>
   Object.keys(Chain).find(c => Chain[c] === chainNumber) as Networks | null;
-

@@ -1,4 +1,4 @@
-import { types, typesBundle, rpc } from '@parallel-finance/type-definitions';
+import { rpc, types, typesBundle } from '@parallel-finance/type-definitions';
 import { RpcService } from './RpcService';
 import {
   PolkadotAccountTokenData,
@@ -7,9 +7,9 @@ import {
   Transfer
 } from './models';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { bnMax, BN } from '@polkadot/util';
+import { BN, bnMax } from '@polkadot/util';
 
-import { Asset, Chain, Balances, AssetType } from '../assets/models';
+import { Asset, AssetType, Balances, Chain } from '../assets/models';
 import { getSubscanClient, SUBSCAN_EXTRINSIC, SUBSCAN_TRANSFERS } from './subscan';
 export class PolkadotRpcService implements RpcService {
   public api: ApiPromise;

@@ -8,12 +8,10 @@ module.exports = {
   extends: ['plugin:react/recommended', 'standard', 'prettier', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    },
     ecmaVersion: 12,
     sourceType: 'module'
   },
+  ignorePatterns: ['src/**/*.test.ts', 'lib/'],
   plugins: ['@typescript-eslint', 'lodash'],
   rules: {
     'no-use-before-define': 'off',

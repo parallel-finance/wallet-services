@@ -1,9 +1,9 @@
 import { TransferRequest } from './models';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import type { Ledger } from '@polkadot/hw-ledger';
-import { types, typesBundle, rpc } from '@parallel-finance/type-definitions';
+import { rpc, types, typesBundle } from '@parallel-finance/type-definitions';
 import { PolkadotTransactionSigner } from './signer/PolkadotTransactionSigner';
-import { Asset, Chain, Networks, NativeTokenSymbols, NetworkType } from './assets/models';
+import { Asset, Chain, NativeTokenSymbols, Networks, NetworkType } from './assets/models';
 import BigNumber from 'bignumber.js';
 import { statefulRpc } from './rpc/statefulRpc';
 import { assetService } from './assets/AssetService';

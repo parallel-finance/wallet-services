@@ -6,7 +6,6 @@ import { Chain, Networks } from '../../assets/models';
 import { statefulRpc } from '../../rpc/statefulRpc';
 import { SubmittableExtrinsic } from '@polkadot/api/types';
 
-
 export const createXcmVersionedMultiLocation = (address: string) => ({
   V1: {
     parents: 1,
@@ -28,8 +27,8 @@ export const withdrawToRelay = async (
   amount: string,
   address: string
 ): Promise<{
-  api: ApiPromise,
-  tx: SubmittableExtrinsic<'promise'>
+  api: ApiPromise;
+  tx: SubmittableExtrinsic<'promise'>;
 }> => {
   const chain = Chain[sourceNetwork];
   const { api }: { api: ApiPromise } = await statefulRpc.getRpcConnection(chain);

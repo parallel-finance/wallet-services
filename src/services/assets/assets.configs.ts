@@ -1,16 +1,16 @@
 /// In this file we define substrate assets configuration
 
-import { AssetConfig, Networks, NativeTokenSymbols, Chain } from './models';
+import { AssetConfig, Chain, NativeTokenSymbols, Networks } from './models';
 import {
-  PARALLEL_ASSETS,
-  HEIKO_ASSETS,
-  POLKADOT_ASSETS,
-  KUSAMA_ASSETS,
   ACALA_ASSETS,
+  ASTAR_ASSETS,
+  HEIKO_ASSETS,
+  KARURA_ASSETS,
+  KUSAMA_ASSETS,
   MOONBEAM_ASSETS,
   MOONRIVER_ASSETS,
-  KARURA_ASSETS,
-  ASTAR_ASSETS
+  PARALLEL_ASSETS,
+  POLKADOT_ASSETS
 } from './AssetConfig';
 
 export const ASSETS_CONFIGS: AssetConfig[] = [

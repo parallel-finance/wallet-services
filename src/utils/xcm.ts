@@ -1,5 +1,5 @@
 import { decodeAddress } from '@polkadot/keyring';
-import { u8aToHex, BN } from '@polkadot/util';
+import { BN, u8aToHex } from '@polkadot/util';
 import { BigNumber } from 'bignumber.js';
 
 export const addressToHex = (address: string) => u8aToHex(decodeAddress(address));

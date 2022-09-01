@@ -1,4 +1,4 @@
-import { Chain, AssetType } from '../models';
+import { AssetType, Chain } from '../models';
 import { getChainAssets } from '../utils';
 
 export const KARURA_ASSETS = [

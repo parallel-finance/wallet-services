@@ -1,4 +1,4 @@
-import { Chain, AssetType, NativeTokenSymbols } from '../models';
+import { AssetType, Chain, NativeTokenSymbols } from '../models';
 import { getChainAssets } from '../utils';
 
 export const PARALLEL_ASSETS = [
