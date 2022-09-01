@@ -5,14 +5,14 @@ module.exports = {
     webextensions: true,
     es2021: true
   },
-  extends: ['plugin:react/recommended', 'standard', 'prettier', 'plugin:prettier/recommended'],
+  extends: ['standard', 'prettier', 'plugin:prettier/recommended', 'plugin:jest/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module'
   },
   ignorePatterns: ['src/**/*.test.ts', 'lib/'],
-  plugins: ['@typescript-eslint', 'lodash'],
+  plugins: ['@typescript-eslint', 'lodash', 'jest'],
   rules: {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
