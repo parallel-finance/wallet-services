@@ -3,6 +3,7 @@ import { Wallet, WalletSource, WalletWithAssets } from '../models';
 import { getRandomUniqueWalletId } from '../cryptography/RandomGen';
 import { Encryptor } from '../cryptography/Encryptor';
 import { Asset, Chain, LedgerNetworksDerivableMap, Networks } from '../assets/models';
+import { NETWORK_LIST } from '../../config/networkChains';
 import { AssetGenerator } from '../assets/AssetGenerator';
 import { WalletCreationResult } from './models';
 import { ASSETS_CONFIGS } from '../assets/assets.configs';
@@ -167,7 +168,13 @@ export class WalletCreator {
   ): Promise<Asset[]> {
     const initialAssets: Asset[] = [];
     const allAssets = ASSETS_CONFIGS.filter(assetConfig => {
-      const chains = LedgerNetworksDerivableMap[_network].map(network => Chain[network]);
+      const chains = LedgerNetworksDerivableMap[_network]
+        .map(network => Chain[network])
+        .filter(
+          chain =>
+            NETWORK_LIST.find(network => network.value !== 'ALL' && network.chain.includes(chain))
+              ?.supportLedgerImport
+        );
       return chains.includes(assetConfig.chain);
     });
     for (const assetConfig of allAssets) {
