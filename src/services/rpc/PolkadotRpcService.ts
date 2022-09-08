@@ -19,7 +19,7 @@ export class PolkadotRpcService implements RpcService {
   }
 
   public static async init(baseUrl: string) {
-    const provider = new WsProvider(baseUrl, 30000);
+    const provider = new WsProvider(baseUrl, 500);
     const api = await ApiPromise.create({ provider: provider, types, typesBundle, rpc });
     return new PolkadotRpcService(api);
   }
