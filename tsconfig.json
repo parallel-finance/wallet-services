@@ -1,14 +1,49 @@
 {
+
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "ES2020",
-    "strict": true,
-    "esModuleInterop": true,
+    /* Basic Options */
+    "target": "es2016",
+    "module": "ESNext",
+    "pretty": true,
+    "allowJs": true,
+    "sourceMap": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true,
+    
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "importHelpers": true,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": false,
+    "alwaysStrict": true,
+    "strictNullChecks": false,
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [
+        "node",
+        "jest"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
+    "lib": ["es2016", "esnext.asynciterable", "dom"],
     "outDir": "./lib/esm",
   },
   "include": [
-    "./src"
-  ]
+    "./src", "types/global.d.ts"],
+  "typeRoots": ["./node_modules/@types", "./types"],
+  "exclude": ["node_modules", "lib"]
 }
