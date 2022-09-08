@@ -9,22 +9,7 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: |
-          npm i -g yarn
-      - run: |
-          git config --global url."https://github".insteadOf ssh://git@github
-      - run: yarn
-      - run: yarn test
-
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,6 +20,7 @@ jobs:
       - run: |
           git config --global url."https://github".insteadOf ssh://git@github
       - run: yarn
+      - run: yarn test
       
       - name: ⚙️ Prepare package & version
         run: |
@@ -43,7 +29,7 @@ jobs:
 
       - run: |
           git stash && echo "ok"
-          yarn version patch
+          yarn version
           git push --follow-tags origin main
       - run: yarn publish --access public
         env:
