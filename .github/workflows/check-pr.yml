@@ -14,8 +14,6 @@ jobs:
         run: pwd && sudo chown -R $USER:$USER ./
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
-        run: | 
-          git config --global url.https://github.com/.insteadOf git@github.com:
         uses: actions/setup-node@v1.4.4
         with:
           node-version: 14.x
@@ -31,10 +29,10 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependencies
-        run: |
-          npm i -g yarn
-          yarn
+        run: git config --global url."https://github".insteadOf ssh://git@github
+        run: npm i -g yarn
+        run: yarn
       - name: Run linter
         run: yarn lint
       - name: Run unit tests
-        run: yarn run test
+        run: yarn test
