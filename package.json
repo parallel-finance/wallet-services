@@ -8,10 +8,11 @@
     "lib/"
   ],
   "scripts": {
-    "build": "npx rimraf lib/ && npx tsc -p tsconfig.json",
+    "build": "npx tsc -p tsconfig.json",
     "build:global": "npx tsc -p tsconfig.json && npx tsc -p tsconfig-cjs.json",
     "build-local:watch": "npx tsc-watch --onSuccess \"yalc push\"",
-    "prepublish": "npm run build",
+    "clean": "npx rimraf lib/",
+    "prepublish": "npm run clean && npm run build:global",
     "lint": "eslint . --quiet --fix --ext .ts",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watch-all",
