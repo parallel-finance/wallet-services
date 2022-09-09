@@ -29,8 +29,9 @@ jobs:
 
       - run: |
           git stash && echo "ok"
-          yarn version
+          yarn version --new-version patch
           git push --follow-tags origin main
+
       - run: yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
