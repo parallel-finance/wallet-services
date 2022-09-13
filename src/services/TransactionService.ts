@@ -128,7 +128,7 @@ export class TransactionService {
       transferRequest.decryptedPhrase
     );
 
-    const partialFee = feeEstimates.partialFee as number;
+    const partialFee = (feeEstimates?.partialFee || 0) as number;
 
     // Since transaction fee and estimates are always in native asset, we need to use native asset decimals
     // So we look for the corresponding native asset of the current chain
