@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@parallel-finance/type-definitions": "1.7.8",
-    "@polkadot/api": "7.15.1",
+    "@polkadot/api": "^9.3.3",
     "@polkadot/hw-ledger": "10.1.3",
     "@talismn/chaindata": "github:TalismanSociety/chaindata#9b1fbf9a946a35666d5c19ed95e5f794941cd817",
     "axios": "0.27.2",
