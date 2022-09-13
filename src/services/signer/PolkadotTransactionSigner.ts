@@ -73,6 +73,7 @@ export class PolkadotTransactionSigner {
       return paymentInfo.toJSON();
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 
