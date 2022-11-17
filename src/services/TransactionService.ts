@@ -184,10 +184,19 @@ export class TransactionService {
   }
 
   public getTransactionUrl(txHash: string, chain: Chain) {
-    // https://polkadot.subscan.io/extrinsic/0x4628bc552c70b76e4d1d4762a02602a85d677f72305a8cefa40f38e360fbc4b2
     const baseUrl = getChainScanAPI(chain);
     const baseExplorerUrl = baseUrl.replace('.api', '');
-    return `${baseExplorerUrl}/extrinsic/${txHash}`;
+    switch (chain) {
+      case Chain.INJECTIVE: {
+        // https://polkadot.subscan.io/extrinsic/0x4628bc552c70b76e4d1d4762a02602a85d677f72305a8cefa40f38e360fbc4b2
+        return `${baseExplorerUrl}/transaction/${txHash}`;
+      }
+
+      default: {
+        // https://explorer.injective.network/transaction/2089DA3704561B40A9B2D3265A78F40A6D89115D4B1EA669D2F6B92FC666380B
+        return `${baseExplorerUrl}/extrinsic/${txHash}`;
+      }
+    }
   }
 
   public openExplorerAccountUrl(asset: Asset) {

@@ -22,7 +22,7 @@ export const getChainScanAPI = (chain: Chain): string => {
     case Chain.ASTAR:
       return 'https://astar.api.subscan.io';
     case Chain.INJECTIVE:
-      return 'https://api.injective.network';
+      return 'https://explorer.injective.network';
 
     case Chain.ETH:
     case Chain.SUBSTRATE:
