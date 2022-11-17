@@ -112,3 +112,31 @@ export interface ExtrinsicParam {
   type_name: string;
   value: any;
 }
+
+type CosmosAmount = {
+  denom: string;
+  amount: string;
+};
+
+type CosmosMessage = {
+  type: string;
+  value: {
+    amount: CosmosAmount[];
+    from_address: string;
+    to_address: string;
+  };
+};
+
+export type CosmosTransaction = {
+  block_number: number;
+  block_timestamp: string;
+  hash: string;
+  code: number;
+  gas_wanted: number;
+  gas_used: number;
+  gas_fee: {
+    amount: CosmosAmount[];
+  };
+  gas_limit: number;
+  messages: CosmosMessage[];
+};

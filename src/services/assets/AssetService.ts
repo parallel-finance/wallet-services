@@ -23,6 +23,7 @@ export class AssetService {
       case Chain.MOONBEAM:
       case Chain.ASTAR:
       case Chain.MOONRIVER:
+      case Chain.INJECTIVE:
       case Chain.HEIKO: {
         // Asset tokenID is expected to be a numerical on substrate network
         accountBalance = isNativeAsset
@@ -32,7 +33,9 @@ export class AssetService {
       }
       case Chain.ETH:
       default:
-        throw TypeError(`Asset not support yet${asset.symbol}`);
+        throw TypeError(
+          `${asset.symbol} asset of the ${asset.chain} not support yet ${asset.symbol}`
+        );
     }
     const massagedBalances = {
       total: massageBalancesFromRPC(accountBalance?.total, asset.decimals),

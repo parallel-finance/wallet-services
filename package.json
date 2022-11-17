@@ -55,6 +55,9 @@
     "typescript": "4.6.3"
   },
   "dependencies": {
+    "@cosmjs/amino": "^0.29.4",
+    "@cosmjs/proto-signing": "^0.29.3",
+    "@cosmjs/stargate": "^0.29.3",
     "@parallel-finance/type-definitions": "1.7.8",
     "@polkadot/api": "^9.3.3",
     "@polkadot/hw-ledger": "10.1.3",

@@ -7,6 +7,7 @@ import { MOONBEAM_ASSETS } from './moonbeam';
 import { MOONRIVER_ASSETS } from './moonriver';
 import { KARURA_ASSETS } from './karura';
 import { ASTAR_ASSETS } from './astar';
+import { INJECTIVE_ASSETS } from './injective';
 
 export {
   POLKADOT_ASSETS,
@@ -17,5 +18,6 @@ export {
   MOONBEAM_ASSETS,
   MOONRIVER_ASSETS,
   KARURA_ASSETS,
-  ASTAR_ASSETS
+  ASTAR_ASSETS,
+  INJECTIVE_ASSETS
 };

@@ -1,7 +1,8 @@
 import { ResponseSigning, TransferTransactionUnsigned } from './models';
-import { ApiPromise } from '@polkadot/api';
+import { ApiPromise, WsProvider } from '@polkadot/api';
 import type { Ledger } from '@polkadot/hw-ledger';
 import BigNumber from 'bignumber.js';
+import { rpc, types, typesBundle } from '@parallel-finance/type-definitions';
 import LedgerSigner from './LedgerSigner';
 import { AssetType, Chain } from '../assets/models';
 import { getKeyringPair, getLockedKeyringPair } from '../../utils/crypto';
@@ -9,8 +10,19 @@ import { getKeyringPair, getLockedKeyringPair } from '../../utils/crypto';
 export class PolkadotTransactionSigner {
   public api: ApiPromise;
 
-  public constructor(apiClient: ApiPromise) {
-    this.api = apiClient;
+  public constructor(rpcUrl: string) {
+    this.init(rpcUrl);
+  }
+
+  private async init(rpcUrl) {
+    const provider = new WsProvider(rpcUrl);
+    const api: ApiPromise = await ApiPromise.create({
+      provider: provider,
+      types,
+      typesBundle,
+      rpc
+    });
+    this.api = api;
   }
 
   // First successful transaction: https://westend.subscan.io/extrinsic/10600841-2
@@ -18,7 +30,7 @@ export class PolkadotTransactionSigner {
     transaction: TransferTransactionUnsigned,
     phrase: string
   ): Promise<ResponseSigning> {
-    const { signingKey, transferTx } = this.prepareTxData(transaction, phrase);
+    const { signingKey, transferTx } = await this.prepareTxData(transaction, phrase);
 
     const signedTxResult = await transferTx.signAndSend(signingKey);
 
@@ -36,7 +48,7 @@ export class PolkadotTransactionSigner {
     transaction: TransferTransactionUnsigned
   ): Promise<string> {
     try {
-      const { transferTx } = this.prepareTxData(transaction, '');
+      const { transferTx } = await this.prepareTxData(transaction, '');
       await transferTx.signAsync(transaction.fromAddress, {
         nonce: -1,
         signer: new LedgerSigner(transferTx.registry, ledger, 0, 0)
@@ -68,7 +80,7 @@ export class PolkadotTransactionSigner {
 
   async estimateTransferFee(transaction: TransferTransactionUnsigned, phrase: string) {
     try {
-      const { signingKey, transferTx } = this.prepareTxData(transaction, phrase);
+      const { signingKey, transferTx } = await this.prepareTxData(transaction, phrase);
       const paymentInfo = await transferTx.paymentInfo(signingKey);
       return paymentInfo.toJSON();
     } catch (error) {
@@ -77,11 +89,11 @@ export class PolkadotTransactionSigner {
     }
   }
 
-  private prepareTxData(transaction: TransferTransactionUnsigned, phrase: string) {
+  private async prepareTxData(transaction: TransferTransactionUnsigned, phrase: string) {
     const asset = transaction.asset;
     const ss58Value = asset?.chain?.valueOf();
     const signingKey = phrase
-      ? getKeyringPair(asset.accountType, ss58Value, phrase)
+      ? await getKeyringPair(asset.accountType, ss58Value, phrase)
       : getLockedKeyringPair(ss58Value, transaction.fromAddress);
 
     const amount = new BigNumber(transaction.amount)

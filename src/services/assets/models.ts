@@ -24,7 +24,8 @@ export enum Chain {
 
   // relay chains
   PARALLEL_RELAY = 2012,
-  HEIKO_RELAY = 2085
+  HEIKO_RELAY = 2085,
+  INJECTIVE = 123 // TODO what means of the number value?
 }
 
 export enum Networks {
@@ -43,7 +44,8 @@ export enum Networks {
   KARURA = 'KARURA',
   ASTAR = 'ASTAR',
 
-  SUBSTRATE = 'SUBSTRATE'
+  SUBSTRATE = 'SUBSTRATE',
+  INJECTIVE = 'INJECTIVE'
 }
 
 export const LedgerNetworksDerivableMap = {
@@ -66,13 +68,15 @@ export enum NativeTokenSymbols {
   GLMR = 'GLMR',
   MOVR = 'MOVR',
   KAR = 'KAR',
-  ASTR = 'ASTR'
+  ASTR = 'ASTR',
+  INJ = 'INJ'
 }
 
 export interface ChainConfig {
   rpcUrl: string;
   chainId: string;
   chain: Chain;
+  addressPrefix?: string;
 }
 
 export enum NetworkType {
@@ -118,6 +122,7 @@ export interface Asset extends AssetConfig {
   iconUrl: string;
 
   address: string;
+  addressPrefix?: string;
   publicKey?: string;
 
   balances: Balances | null;

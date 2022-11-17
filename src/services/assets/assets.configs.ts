@@ -5,6 +5,7 @@ import {
   ACALA_ASSETS,
   ASTAR_ASSETS,
   HEIKO_ASSETS,
+  INJECTIVE_ASSETS,
   KARURA_ASSETS,
   KUSAMA_ASSETS,
   MOONBEAM_ASSETS,
@@ -22,7 +23,8 @@ export const ASSETS_CONFIGS: AssetConfig[] = [
   ...MOONBEAM_ASSETS,
   ...MOONRIVER_ASSETS,
   ...KARURA_ASSETS,
-  ...ASTAR_ASSETS
+  ...ASTAR_ASSETS,
+  ...INJECTIVE_ASSETS
 ];
 
 export const NATIVE_TOKENS = {
@@ -36,7 +38,8 @@ export const NATIVE_TOKENS = {
   [Networks.MOONBEAM]: NativeTokenSymbols.GLMR,
   [Networks.MOONRIVER]: NativeTokenSymbols.MOVR,
   [Networks.KARURA]: NativeTokenSymbols.KAR,
-  [Networks.ASTAR]: NativeTokenSymbols.ASTR
+  [Networks.ASTAR]: NativeTokenSymbols.ASTR,
+  [Networks.INJECTIVE]: NativeTokenSymbols.INJ
 };
 
 export const CROSSCHAIN_NETWORK_SYMBOLS = {
@@ -80,10 +83,12 @@ export const MAX_TX_FEES: Record<NativeTokenSymbols, number> = {
   [NativeTokenSymbols.GLMR]: 0.0005,
   [NativeTokenSymbols.MOVR]: 0.0005,
   [NativeTokenSymbols.KAR]: 0.005,
-  [NativeTokenSymbols.ASTR]: 0.002
+  [NativeTokenSymbols.ASTR]: 0.002,
+  [NativeTokenSymbols.INJ]: 0.0002 // TODO this is the max BRIDGE_FEE
 };
 
 export const ASSET_ACCOUNT_TYPES = {
   SECP256K1: 'secp256k1',
-  SR25519: 'sr25519'
+  SR25519: 'sr25519',
+  COSMOS: 'cosmos'
 };

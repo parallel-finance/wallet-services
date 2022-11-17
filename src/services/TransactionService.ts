@@ -1,7 +1,7 @@
+import { CosmosTransactionSigner } from './signer/CosmosTransactionSigner';
 import { TransferRequest } from './models';
-import { ApiPromise, WsProvider } from '@polkadot/api';
+import { ApiPromise } from '@polkadot/api';
 import type { Ledger } from '@polkadot/hw-ledger';
-import { rpc, types, typesBundle } from '@parallel-finance/type-definitions';
 import { PolkadotTransactionSigner } from './signer/PolkadotTransactionSigner';
 import { Asset, Chain, NativeTokenSymbols, Networks, NetworkType } from './assets/models';
 import BigNumber from 'bignumber.js';
@@ -152,6 +152,16 @@ export class TransactionService {
     return await rpc.getTransactionByHash(transactionHash, chain);
   }
 
+  private getTransactionSigner(chain: Chain) {
+    switch (chain) {
+      case Chain.INJECTIVE: {
+        return CosmosTransactionSigner;
+      }
+      default:
+        return PolkadotTransactionSigner;
+    }
+  }
+
   private async initializeSigner(
     transferRequest: TransferRequest,
     networkType: NetworkType,
@@ -160,17 +170,12 @@ export class TransactionService {
     const transferAsset = transferRequest.asset;
 
     const chain = targetNetwork ? Chain?.[targetNetwork] : transferAsset.chain;
-    const chainConfig = statefulRpc.getChainConfig(chain, networkType);
-    const provider = new WsProvider(chainConfig.rpcUrl);
-    const api: ApiPromise = await ApiPromise.create({
-      provider: provider,
-      types,
-      typesBundle,
-      rpc
-    });
+    const { rpcUrl } = statefulRpc.getChainConfig(chain, networkType);
 
-    const signer = new PolkadotTransactionSigner(api);
-    return { transferAsset, signer, api };
+    const TransactionSigner = this.getTransactionSigner(transferAsset.chain);
+
+    const signer = new TransactionSigner(rpcUrl);
+    return { transferAsset, signer };
   }
 
   public async fetchTransactionHistory(asset: Asset, networkType: NetworkType) {

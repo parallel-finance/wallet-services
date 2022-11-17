@@ -1,9 +1,10 @@
-import { Asset, AssetConfig, AssetType, Chain } from './models';
+import { Asset, AssetConfig, AssetType, Chain, NetworkType } from './models';
 import { Keyring } from '@polkadot/keyring';
 import { getRandomUniqueAssetId } from '../cryptography/RandomGen';
 import { cryptoIsReady, cryptoWaitReady } from '@polkadot/util-crypto';
 import { WalletWithAssets } from '../models';
 import { getKeyringPair } from '../../utils/crypto';
+import { chainsDetail } from '../../config/chainsDetail';
 export class AssetGenerator {
   public walletId: string;
 
@@ -18,11 +19,13 @@ export class AssetGenerator {
     existingWallets: Array<WalletWithAssets>
   ): Promise<Asset> {
     await this.checkOnCryptoModule();
-    const { ss58Value, accountPublicKey, address } = this.createAddress(assetConfig, _phrase);
+    const { ss58Value, accountPublicKey, address } = await this.createAddress(assetConfig, _phrase);
     const assetId = getRandomUniqueAssetId(existingWallets, assetConfig.decimals);
 
+    const addressPrefix = chainsDetail[NetworkType.MAINNET][assetConfig.chain].addressPrefix;
     return {
       address,
+      addressPrefix,
       assetId,
       assetType: assetConfig.assetType,
       balances: nullBalance
@@ -55,7 +58,11 @@ export class AssetGenerator {
     existingWallets: Array<WalletWithAssets>
   ): Promise<Asset> {
     await this.checkOnCryptoModule();
-    const { ss58Value, accountPublicKey, address } = this.createAddress(assetConfig, '', _address);
+    const { ss58Value, accountPublicKey, address } = await this.createAddress(
+      assetConfig,
+      '',
+      _address
+    );
     const assetId = getRandomUniqueAssetId(existingWallets, assetConfig.decimals);
 
     return {
@@ -85,13 +92,13 @@ export class AssetGenerator {
     };
   }
 
-  private createAddress(
+  private async createAddress(
     assetConfig: AssetConfig,
     _phrase: string,
     _address?: string
-  ): AddressGenerationResult {
+  ): Promise<AddressGenerationResult> {
     const ss58Value = assetConfig.chain.valueOf();
-
+    const addressPrefix = chainsDetail[NetworkType.MAINNET][assetConfig.chain]?.addressPrefix;
     // if address is provided we derive keyring pair from it otherwise we derive from phrase
     let keyringPair;
     if (_address) {
@@ -99,7 +106,7 @@ export class AssetGenerator {
       keyring.setSS58Format(ss58Value);
       keyringPair = keyring.addFromAddress(_address);
     } else {
-      keyringPair = getKeyringPair(assetConfig.account, ss58Value, _phrase);
+      keyringPair = await getKeyringPair(assetConfig.account, ss58Value, _phrase, addressPrefix);
     }
 
     const accountPublicKey = Buffer.from(keyringPair.publicKey).toString('hex');

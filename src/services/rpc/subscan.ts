@@ -21,6 +21,8 @@ export const getChainScanAPI = (chain: Chain): string => {
       return 'https://karura.api.subscan.io';
     case Chain.ASTAR:
       return 'https://astar.api.subscan.io';
+    case Chain.INJECTIVE:
+      return 'https://api.injective.network';
 
     case Chain.ETH:
     case Chain.SUBSTRATE:
