@@ -1,4 +1,4 @@
-import { NetworkType, Chain } from './../services/assets/models';
+import { Chain, NetworkType } from './../services/assets/models';
 
 type ChainsDetail = Record<
   Exclude<Chain, Chain.SUBSTRATE>, // No rpcUrl config for the SUBSTRATE chain
