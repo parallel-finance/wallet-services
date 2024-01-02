@@ -14,7 +14,7 @@ class StatefulRPC {
             return {
               chain,
               chainId,
-              rpcUrl: 'wss://rpc.parallel.fi'
+              rpcUrl: 'wss://polkadot-parallel-rpc.parallel.fi'
             };
           case Chain.HEIKO:
             return {
